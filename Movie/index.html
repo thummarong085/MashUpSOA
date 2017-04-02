@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api" type="text/javascript"></script>
+    <title> Movie DB API + ... API</title>
+    <scriptz
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous">
+
+    </script>
+
+
+
+    <style>
+		body {
+	            font-family: 'Open Sans', sans-serif;
+            
+
+	        }
+
+	        a{
+	            color: #c0392b;
+	        }
+
+	        .navbar-default .navbar-brand {
+	            color: rgba(179, 68, 68, 1);
+	        }
+
+	        .navbar-default .navbar-brand {
+	            color: rgba(255, 255, 255, 1);
+	        }
+
+	        .navbar-default {
+	            font-family: 'Open Sans', sans-serif;
+	            font-size: 14px;
+	            background-color: orange;
+	            border-width: 0px;
+	        }
+
+	            .navbar-default .navbar-nav > li > a {
+	                color: rgba(255, 255, 255, 1);
+	                background-color: MistyRose ;
+	            }
+
+
+
+
+      h1{
+          color: red;
+          font-family: verdana;
+          font-size: 200%;
+      }
+
+			input[type=submit] {
+	    width: 10%;
+	    background-color: pink;
+	    color: white;
+	    padding: 14px 20px;
+	    margin: 8px 0;
+	    border: none;
+	    border-radius: 4px;
+	    cursor: pointer;
+	}
+
+input[type=text] {
+    width: 20%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+}
+
+
+html { height: 100% }
+body {
+    height:100%;
+    margin:0;padding:0;
+    font-family:tahoma, "Microsoft Sans Serif", sans-serif, Verdana;
+    font-size:12px;
+}
+
+/* cs กำหนดความกว้าง ความสูงของแผนที่ */
+#map_canvas {
+    width:550px;
+    height:400px;
+    margin:auto;
+/*  margin-top:100px;*/
+}
+    </style>
+  </head>
+  <body>
+		<div class="navbar navbar-default navbar-fixed-top">
+	         <div class="container">
+	             <div class="navbar-header">
+
+	                 <div class="navbar-brand">
+	                     <img class="pull-left" src="http://www.owensvalleyhistory.com/at_the_movies18/film_reel_r.png" style="width:35px; margin-right:10px; margin-top:5px" />
+
+	                 </div>
+
+
+ </div>
+  </div>
+	 </div>
+
+
+    <div class="form-group" align="center">
+		<h2>ใส่ชื่อหนังที่ต้องการค้นหา</h2>
+		<form>
+		  <input type="text" id="url" name="search" placeholder="ค้นหา..">
+		</form>
+
+    </div>
+    <br>
+
+
+		<div class="form-group" align="center">
+			 <input type="submit" id="go" onclick = "goOpenWeather()" value="ตกลง" >
+
+       <div id="player-content"></div>
+       <ul id="video-list">
+			 </div>
+
+
+
+    <br>
+
+    <br>
+
+		<div class="form-group" align="center">
+			<fieldset><legend><b>ข้อมูลหนัง</b></legend>
+		<p id="movie_result1">
+
+    <p id="movie_result2">
+    </p>
+		<p id="movie_result3">
+    </p>
+		<p id="movie_result4">
+    </p>
+		<p id="movie_result5">
+    </p>
+		<p id="movie_result6">
+    </p>
+		<p id="movie_result7">
+    </p>
+ <img id="img" />
+
+	</fieldset>
+		 </div>
+
+
+
+
+
+
+		 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+    <script type="text/javascript">
+    function goOpenWeather() {
+      var Text = $('#url').val();
+      var OpenMovieUrl = "http://www.omdbapi.com/?t="+Text+"";
+      //var PosterUrl = "http://img.omdbapi.com/?i=tt2294629&apikey=543f5fb4";
+      console.log(OpenMovieUrl);
+
+      $.ajax({
+                url: OpenMovieUrl,
+                method: 'GET'
+              }).then(function(response) {
+                  console.log(response.Title);
+									$('#movie_result1').text("ชือเรื่อง : "+response.Title);
+
+
+									$('#movie_result2').text("ปีทีออกฉาย : "+response.Year);
+									$('#movie_result3').text("วันที่ออกฉาย : "+ response.Released);
+                  $('#movie_result4').text("ประเภทหนัง : "+response.Genre);
+                  $('#movie_result5').text("ภาพโปสเตอร์ ");
+                  //$('#weather_result6').text("อุณภูมิ : "+ response.main.temp + " องศาเซลเซียส");
+									//$("#weather_result7").text("ตัวย่อประเทศ : "+response.sys.country);
+								 //var lat =	initialize(response.coord.lat);
+							//	var lon =		initialize(response.coord.lon);
+								//initialize(response.coord.lat,response.coord.lon);
+
+var a = response.Poster;
+console.log(a);
+
+$('#img').attr('src',a);
+
+
+
+              });
+    }
+
+
+
+
+
+		</script>
+ <script type="text/javascript">
+ $(document).ready(function() {
+     $('#go').click(function(event) {
+         var search = $('#url').val();
+
+         $.getJSON('https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + encodeURIComponent(search) + '&orderby=relevance&max-results=10&category=music&key=AIzaSyCDSUsNu8Xdp6dL95Qnu62seqaq8Hzgkl8', function(response) {
+             console.log(response);
+
+             for(i=0; i < response.items.length; i++) {
+                 $('#video-list').append('<li id="' +response.items[i].id.videoId + '">')
+                 };
+
+             playVideo($('#video-list li:first').attr('id'));
+
+             $('#video-list li').click(
+           function(event) {
+             console.log("click");
+                 //event.preventDefault();
+                 playVideo($(this).attr('id'));
+           }
+         );
+         });
+
+     });
+
+
+
+ });
+
+ playVideo = function(videoId) {
+   var path = '<iframe id="youtube-player" type="text/html"  width="100%" height="auto"   src="http://www.youtube.com/embed/' +videoId + '?autoplay=1"></iframe>';
+     $('#player-content').html(path);
+
+ }
+    </script>
+
+
+
+
+  </body>
+</html>
